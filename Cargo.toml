@@ -1,0 +1,19 @@
+[package]
+name = "rust-arithmetic-benchmark"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ramp = "0.6.0"
+num = "0.4.0"
+num-bigint = { version = "0.4.0", features = ["rand"] }
+once_cell = "1.7.2"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "arithmetic"
+harness = false
