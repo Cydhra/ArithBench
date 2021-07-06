@@ -10,8 +10,8 @@ fn addition(c: &mut Criterion) {
     group.sample_size(SAMPLE_SIZE);
 
     group.bench_function("ramp", |bench| {
+        let n = RampField::from(21);
         bench.iter(|| {
-            let n = RampField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
                 result = result + &n;
@@ -21,8 +21,8 @@ fn addition(c: &mut Criterion) {
     });
 
     group.bench_function("num", |bench| {
+        let n = NumField::from(21);
         bench.iter(|| {
-            let n = NumField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
                 result = result + &n;
@@ -39,8 +39,8 @@ fn multiplication(c: &mut Criterion) {
     group.sample_size(SAMPLE_SIZE);
 
     group.bench_function("ramp", |bench| {
+        let n = RampField::from(21);
         bench.iter(|| {
-            let n = RampField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
                 result = result * &n;
@@ -50,8 +50,8 @@ fn multiplication(c: &mut Criterion) {
     });
 
     group.bench_function("num", |bench| {
+        let n = NumField::from(21);
         bench.iter(|| {
-            let n = NumField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
                 result = result * &n;
