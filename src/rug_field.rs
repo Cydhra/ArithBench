@@ -4,7 +4,7 @@ use once_cell::sync::Lazy;
 use rug::Integer;
 
 static FIELD_PRIME: Lazy<Integer> = Lazy::new(|| {
-    Integer::parse_radix("618970019642690137449562111", 10).unwrap()
+    Integer::from_str_radix("618970019642690137449562111", 10).unwrap()
 });
 
 #[derive(Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
@@ -12,7 +12,7 @@ pub struct RugField(Integer);
 
 impl From<usize> for RugField {
     fn from(n: usize) -> Self {
-        RugField(Int::from(n) % FIELD_PRIME.deref())
+        RugField(Integer::from(n) % FIELD_PRIME.deref())
     }
 }
 

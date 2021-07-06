@@ -1,6 +1,7 @@
 use criterion::{Criterion, black_box, criterion_group, criterion_main};
 use rust_arithmetic_benchmark::num_field::*;
 use rust_arithmetic_benchmark::ramp_field::RampField;
+use rust_arithmetic_benchmark::rug_field::RugField;
 
 const BENCH_SIZE: usize = 5_000_000;
 const SAMPLE_SIZE: usize = 40;
@@ -22,6 +23,17 @@ fn addition(c: &mut Criterion) {
 
     group.bench_function("num", |bench| {
         let n = NumField::from(21);
+        bench.iter(|| {
+            let mut result = n.clone();
+            for _ in 0..BENCH_SIZE {
+                result = result + &n;
+            }
+            black_box(result)
+        })
+    });
+
+    group.bench_function("rug", |bench| {
+        let n = RugField::from(21);
         bench.iter(|| {
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
@@ -59,6 +71,18 @@ fn multiplication(c: &mut Criterion) {
             black_box(result)
         })
     });
+
+    group.bench_function("rug", |bench| {
+        let n = RugField::from(21);
+        bench.iter(|| {
+            let mut result = n.clone();
+            for _ in 0..BENCH_SIZE {
+                result = result * &n;
+            }
+            black_box(result)
+        })
+    });
+
 
     group.finish();
 }
