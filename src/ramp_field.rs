@@ -1,5 +1,4 @@
 use ramp::Int;
-pub use num::FromPrimitive;
 use std::ops::{Add, Mul, Deref};
 use once_cell::sync::Lazy;
 
@@ -13,16 +12,6 @@ pub struct RampField(Int);
 impl From<usize> for RampField {
     fn from(n: usize) -> Self {
         RampField(Int::from(n) % FIELD_PRIME.deref())
-    }
-}
-
-impl FromPrimitive for RampField {
-    fn from_i64(n: i64) -> Option<Self> {
-        Some(RampField(Int::from(n) % FIELD_PRIME.deref()))
-    }
-
-    fn from_u64(n: u64) -> Option<Self> {
-        Some(RampField(Int::from(n) % FIELD_PRIME.deref()))
     }
 }
 

@@ -1,4 +1,4 @@
-pub use num::{FromPrimitive, BigUint, Num};
+pub use num::{BigUint, Num};
 use std::ops::{Add, Mul, Deref};
 use once_cell::sync::Lazy;
 
@@ -12,16 +12,6 @@ pub struct NumField(BigUint);
 impl From<usize> for NumField {
     fn from(n: usize) -> Self {
         NumField(BigUint::from(n) % FIELD_PRIME.deref())
-    }
-}
-
-impl FromPrimitive for NumField {
-    fn from_i64(n: i64) -> Option<Self> {
-        BigUint::from_i64(n).map(|n| NumField(n % FIELD_PRIME.deref()))
-    }
-
-    fn from_u64(n: u64) -> Option<Self> {
-        BigUint::from_u64(n).map(|n| NumField(n % FIELD_PRIME.deref()))
     }
 }
 
