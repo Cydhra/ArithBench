@@ -1,10 +1,9 @@
 use criterion::{Criterion, black_box, criterion_group, criterion_main};
 use rust_arithmetic_benchmark::num_field::*;
 use rust_arithmetic_benchmark::ramp_field::RampField;
-use criterion::SamplingMode::*;
 
 const BENCH_SIZE: usize = 5_000_000;
-const SAMPLE_SIZE: usize = 20;
+const SAMPLE_SIZE: usize = 40;
 
 fn addition(c: &mut Criterion) {
     let mut group = c.benchmark_group("Mass Addition");
@@ -15,7 +14,7 @@ fn addition(c: &mut Criterion) {
             let n = RampField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
-                result = result.clone() + result;
+                result = result + &n;
             }
             black_box(result)
         })
@@ -26,7 +25,7 @@ fn addition(c: &mut Criterion) {
             let n = NumField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
-                result = result.clone() + result;
+                result = result + &n;
             }
             black_box(result)
         })
@@ -44,7 +43,7 @@ fn multiplication(c: &mut Criterion) {
             let n = RampField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
-                result = result.clone() * result;
+                result = result * &n;
             }
             black_box(result)
         })
@@ -55,7 +54,7 @@ fn multiplication(c: &mut Criterion) {
             let n = NumField::from(21);
             let mut result = n.clone();
             for _ in 0..BENCH_SIZE {
-                result = result.clone() * result;
+                result = result * &n;
             }
             black_box(result)
         })
